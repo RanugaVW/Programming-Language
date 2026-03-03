@@ -25,3 +25,22 @@ Lexical analysis is the very **first phase of building a compiler or an interpre
 A computer cannot easily understand raw text characters like `let x = 5`. The scanner removes the "noise" (like spaces and comments) and groups the text into meaningful logical units—**Tokens**.
 
 These tokens are then passed to the next phase (the Parser), which reads the tokens to understand the grammatical structure and build an Abstract Syntax Tree (AST). Without a lexical scanner, translating code into machine instructions would be significantly more difficult!
+
+### How to Compile and Run
+
+To test the lexical scanner on the provided RPAL test files, you can compile the C++ source code using `g++` and then run the compiled executable with the test file as an argument.
+
+Open your terminal, navigate to the `Week 1` directory, and run the following commands:
+
+```bash
+# 1. Compile the C++ program
+g++ lab1_230694J_230429E.cpp -o lexer
+
+# 2. Run the scanner on a test file
+./lexer test.rpal
+
+# Alternatively, test it on the simple version
+./lexer test_simple.rpal
+```
+
+The scanner will read the contents of the given `.rpal` file and output the sequence of tokens it identified in the format `<TYPE, "VALUE">` directly to your terminal screen.
