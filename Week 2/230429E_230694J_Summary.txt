@@ -1,0 +1,25 @@
+Step 1: Identified that the original code used features not supported by the Tiny language or the parser grammar:
+   - Negative numbers (count := count + -1)
+   - Assignment inside 'if/else' blocks similar to modern languages
+   - Complex nested 'while' loops for multiplication with unsupported conditions
+   - 'repeat ... until' loop
+
+Step 2: Analyzed sample Tiny programs and parser grammar to confirm supported syntax:
+   - Only positive increments in loops
+   - Simple boolean conditions
+   - Swapping values using a temporary variable
+   - 'while ... do ... end' loops for repetition
+
+Step 3: Refactored the code:
+   - Removed the 'startn', 'limitn', 'count' variables
+   - Added a swap block: if m <= n, use a temporary variable to swap n and m, ensuring n <= m
+   - Used a while loop that increments i from n to m (inclusive)
+   - Used a simple 'while i <= m' condition
+   - Used direct multiplication 'prod := prod * i' which is supported
+
+Step 4: The new structure is:
+   - Read n and m
+   - If m <= n, swap n and m
+   - Initialize prod := 1 and i := n
+   - while i <= m do: prod := prod * i; i := i + 1; end
+   - Output prod

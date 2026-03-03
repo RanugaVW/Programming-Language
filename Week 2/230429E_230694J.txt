@@ -1,0 +1,20 @@
+program product:
+var n, m, i, prod, temp : integer;
+begin
+   n := read;
+   m := read;
+   if m <= n then
+   begin
+      temp := n;
+      n := m;
+      m := temp
+   end;
+   prod := 1;
+   i := n;
+   while i <= m do
+   begin
+      prod := prod * i;
+      i := i + 1
+   end;
+   output(prod)
+end product.
