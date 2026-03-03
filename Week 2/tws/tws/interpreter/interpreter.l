@@ -2,6 +2,8 @@
 #include "y.tab.h"
 #include <string.h>
 
+extern char *strdup(const char *);
+
 int column = 1;
 %}
 

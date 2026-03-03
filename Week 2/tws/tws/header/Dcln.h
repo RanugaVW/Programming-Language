@@ -14,7 +14,7 @@ Procedures and Functions
      DTEnter(S,T) String S; TreeNode T;
       - Enters the name S into the current scope, with the tree node T.
         The Constrainer uses this procedure to enter declarations as it
-        encounters them. 
+        encounters them.
      TreeNode Lookup(S) String S;
       - Returns the tree node with which current declaration of S was
         entered.
@@ -30,8 +30,8 @@ The following are repeats in C version/port:
 #extern DTEnter();
 #extern OpenScope();
 #extern CloseScope();
-***************************************************************************/ 
-      
+***************************************************************************/
+
 #define true 1
 #define false 0
 #define NullScope 0
@@ -40,11 +40,12 @@ The following are repeats in C version/port:
 typedef int boolean;
 
 struct DclnStorage {
-   Stack CurrentDcln;
-   Stack Name;
-   Stack Prior;
-   Stack Dcln;
- }*DclnTable;
+  Stack CurrentDcln;
+  Stack Name;
+  Stack Prior;
+  Stack Dcln;
+};
+extern struct DclnStorage *DclnTable;
 
 extern int CurrentScope, LastDeclaration;
 extern TreeNode Lookup(String S, TreeNode Source);

@@ -1,3 +1,5 @@
+#include <string.h>
+#include <stdlib.h>
 /* This file is what actually creates the tree */
 #include <stdio.h>
 #include <string.h>

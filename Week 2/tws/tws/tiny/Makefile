@@ -2,9 +2,9 @@ MYOBJS	= .
 TWS	= ..
 TWSOBJS	= $(TWS)/code
 INCLUDE = $(TWS)
-CCFLAGS = -c -g -ansi -I$(INCLUDE)
+CCFLAGS = -c -g -ansi -fcommon -Wno-incompatible-pointer-types -I$(INCLUDE)
 CC	= gcc
-LD	= gcc 
+LD	= gcc -fcommon 
 
 all:	Constrain CodeGen parser/parse
 

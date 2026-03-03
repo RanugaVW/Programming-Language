@@ -15,22 +15,25 @@
 --- A segment of the table can be "reserved".
 
          +----------------------------
-      1  + <identifier>               
+      1  + <identifier>
          +----------------------------
-      2  + <string>                  
+      2  + <string>
          +----------------------------
-      3  + <integer>                         
+      3  + <integer>
          +----------------------------
-      4  + begin                      
+      4  + begin
          +----------------------------
-      5  + end                        
+      5  + end
          +----------------------------
-      6  +  . . .                     
+      6  +  . . .
          +----------------------------
 ************************************************************/
+#ifndef TEXT_H
+#define TEXT_H
+
+#include <stdio.h>
 
 #define UndefinedString 0
-
 typedef int String;
 
 extern int LowerBoundary, UpperBoundary;
@@ -48,3 +51,5 @@ extern void Write_String(FILE *file, int S);
 extern void WriteString(FILE *file, int S);
 extern int IsStringReserved(int S);
 extern void PrintAllStrings(FILE *file);
+
+#endif

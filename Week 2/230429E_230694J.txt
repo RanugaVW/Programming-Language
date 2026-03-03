@@ -1,5 +1,5 @@
 program product:
-var n, m, i, prod, temp : integer;
+var n, m, i, prod, temp, counter, current_prod, new_prod : integer;
 begin
    n := read;
    m := read;
@@ -8,12 +8,24 @@ begin
       temp := n;
       n := m;
       m := temp
+   end
+   else
+   begin
+      temp := temp
    end;
    prod := 1;
    i := n;
    while i <= m do
    begin
-      prod := prod * i;
+      current_prod := prod;
+      new_prod := 0;
+      counter := 1;
+      while counter <= i do
+      begin
+         new_prod := new_prod + current_prod;
+         counter := counter + 1
+      end;
+      prod := new_prod;
       i := i + 1
    end;
    output(prod)

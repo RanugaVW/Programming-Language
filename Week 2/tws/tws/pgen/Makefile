@@ -1,7 +1,7 @@
 TWS  = ..
 TWSBIN = $(TWS)/bin
 SRCS = Main.c GenericTrees.c y.tab.c lex.yy.c Trees.c SymbolTable.c		  Flatten.c TreeCheck.c CodeGen.c BuildTables.c
-CC  = gcc -g -ansi
+CC  = gcc -g -std=gnu89 -fcommon -Wno-incompatible-pointer-types
 #
 OBJS = Main.o GenericTrees.o y.tab.o lex.yy.o Trees.o SymbolTable.o	  Flatten.o TreeCheck.o CodeGen.o BuildTables.o
 #

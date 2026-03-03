@@ -5,7 +5,7 @@ INCLUDE = $(TWS)
 THISDIR	= .
 CC	= gcc
 LD	= gcc -g
-CCFLAGS = -g -c -ansi -I$(INCLUDE)
+CCFLAGS = -g -c -fcommon -Wno-incompatible-pointer-types -I$(INCLUDE)
 
 $(TWSBIN)/interpret:	$(THISDIR)/y.tab.o $(THISDIR)/lex.yy.o \
 		$(THISDIR)/Machine.o $(THISDIR)/Interpret.o \
@@ -26,7 +26,7 @@ $(TWSBIN)/interpret:	$(THISDIR)/y.tab.o $(THISDIR)/lex.yy.o \
 	chmod 755 $(TWSBIN)/interpret
 
 lex.yy.o: lex.yy.c
-	$(CC) -c -g -ansi lex.yy.c
+	$(CC) -c -g -ansi -fcommon -Wno-incompatible-pointer-types lex.yy.c
 
 lex.yy.c: interpreter.l
 	flex interpreter.l 

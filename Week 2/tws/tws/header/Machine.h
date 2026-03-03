@@ -1,6 +1,6 @@
 
 /*******************************************************************
-         Copyright (C) 1986 by Manuel E. Bermudez 
+         Copyright (C) 1986 by Manuel E. Bermudez
 *******************************************************************}
 
 {*******************************************************************
@@ -12,137 +12,136 @@ machine for which the tiny compiler generates code.
 
 Visible portions of the module:
 
-  
+
       type Instruction: representation of an instruction address
 
   Operations to access instructions:
 
         procedure InitializeMachine;
-	   - Initializes the machine.
+           - Initializes the machine.
 
-	procedure LTEnter(n,r : integer);
-	   - Will add entry to LTable with proc level n and
-	     LBR r.
+        procedure LTEnter(n,r : integer);
+           - Will add entry to LTable with proc level n and
+             LBR r.
 
-	procedure LTRemove;
-	   - Will remove most recent proc call with procedure level n
-	   i from LTable.
+        procedure LTRemove;
+           - Will remove most recent proc call with procedure level n
+           i from LTable.
 
- 	function LBRAddress (n : integer) : integer;
-	   - This function will return the address of the LBR of the
-	     most recent procedure call with proc level n.
+        function LBRAddress (n : integer) : integer;
+           - This function will return the address of the LBR of the
+             most recent procedure call with proc level n.
 
         function LabelOf (I:instruction): CLabel;
-	   -  returns the label of instruction I
-      
+           -  returns the label of instruction I
+
         function OpCodeOf (I:Instruction): String;
-	   -  returns the OpCode of instruction I
+           -  returns the OpCode of instruction I
 
         function Operand1Of (I:Instruction): String;
-	   -  returns the first operand of instruction I,
-	      if there is one.
+           -  returns the first operand of instruction I,
+              if there is one.
 
         function Operand2Of (I:Instruction): String;
-	   -  returns the second operand of instruction I,
-	      if there is one.
+           -  returns the second operand of instruction I,
+              if there is one.
 
         procedure IncSTR(i:integer);
-	   -  Increments the Stack Top Register by i
+           -  Increments the Stack Top Register by i
 
         procedure DecSTR(i:integer);
-	   -  Decrements the Stack Top Register by i
+           -  Decrements the Stack Top Register by i
 
         function LocalAddress(i:integer):integer;
-	   -  Returns the address of local variable i
+           -  Returns the address of local variable i
 
         function GlobalAddress(i:integer):integer;
-	   -  Returns the global address of variable i
+           -  Returns the global address of variable i
 
         function Lf(i:integer): integer;
-	   -  Returns the value of the i'th variable in the local frame
+           -  Returns the value of the i'th variable in the local frame
 
         function Gf (i:integer):integer;
-	   -  Returns the value of the i'th variable in the global frame
+           -  Returns the value of the i'th variable in the global frame
 
         procedure UpdateLf (i,v:integer);
-	   -  Replaces the value of the i'th variable in the local frame
-	      with v.
+           -  Replaces the value of the i'th variable in the local frame
+              with v.
 
         procedure UpdateGf(i,v:integer);
-	   -  Replaces the value of the i'th variable in the global frame
-	      with v.
+           -  Replaces the value of the i'th variable in the global frame
+              with v.
 
         procedure PushLf (v:integer);
-	   -  Pushes v on the local frame.
+           -  Pushes v on the local frame.
 
         function TopLf:integer;
-	   -  Returns the top value of the local frame.
+           -  Returns the top value of the local frame.
 
         function PopLf: integer;
-	   -  Returns (and pops) the top value of the local frame.
+           -  Returns (and pops) the top value of the local frame.
 
         procedure PopOffLf(n:integer);
-	   -  Pops off n values from the local frame.
+           -  Pops off n values from the local frame.
 
         function DepthLf:integer;
-	   - Returns the size of the local frame.
+           - Returns the size of the local frame.
 
         procedure OpenFrame(i:integer);
-	   - Opens a new frame, leaving the previous frame with i values.
+           - Opens a new frame, leaving the previous frame with i values.
 
         procedure CloseFrame(i:integer);
-	   -  Closes the local frame, leaving the previous frame with
-	      i more values than it had before closing.
+           -  Closes the local frame, leaving the previous frame with
+              i more values than it had before closing.
 
         procedure PushReturnStack (I:Instruction);
-	   -  Pushes instruction I on the return stack.
+           -  Pushes instruction I on the return stack.
 
         function PopReturnStack: Instruction;
-	   -  Returns (and pops off) the top instruction on the return
-	      stack.
+           -  Returns (and pops off) the top instruction on the return
+              stack.
 
         procedure ReadCode (var CodeFile:text);
-	   -  Reads in the code to be executed from CodeFile.
+           -  Reads in the code to be executed from CodeFile.
 
         procedure DumpMemory(var CodeFile: text);
-	   -  Dumps the memory contents to CodeFile.
+           -  Dumps the memory contents to CodeFile.
 
         procedure DumpCode(var CodeFile: text);
-	   -  Dumps the code memory contents to CodeFile.
+           -  Dumps the code memory contents to CodeFile.
 
 *******************************************************************/
 
-typedef int Instruction;
+#include "../header/Table.h"
+#include "../header/Text.h"
+#include <stdio.h>
 
+typedef int Instruction;
 
 int CBR, CLR, GBR, LBR, STR, RBR, RTR;
 
-Stack Labels, Ops, Operand1, Operand2;  /*  CODE MEMORY   */ 
+Stack Labels, Ops, Operand1, Operand2; /*  CODE MEMORY   */
 
-Stack Data,                        /*  DATA MEMORY   */
-      Return,                      /*  RETURN MEMORY */
-      Aggregate;
-
-
+Stack Data, /*  DATA MEMORY   */
+    Return, /*  RETURN MEMORY */
+    Aggregate;
 
 /*
 var LTable: record
-	CurrLevel: Stack;
-	Level: Stack;
-	LBR: Stack;
-	Prior: Stack;
+        CurrLevel: Stack;
+        Level: Stack;
+        LBR: Stack;
+        Prior: Stack;
     end;
 */
 
-
-
 extern void InitializeMachine(void);
 
-extern LTEnter();
+extern void LTEnter(void);
 
-extern LTRemove();
+extern void LTRemove(void);
 
-extern LBRAddress();
+extern void LBRAddress(void);
 
 /*extern Clabel LabelOf (Instruction I);*/
 
