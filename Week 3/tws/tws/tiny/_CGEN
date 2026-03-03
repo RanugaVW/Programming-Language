@@ -1,0 +1,110 @@
+<<< CODE GENERATOR >>> Processing Node program , Label is  
+<<< CODE GENERATOR >>> Processing Node dclns , Label is  
+<<< CODE GENERATOR >>> Processing Node dcln , Label is  
+       LIT    0             
+Incrementing Framesize to 1
+       LIT    0             
+Incrementing Framesize to 2
+       LIT    0             
+Incrementing Framesize to 3
+       LIT    0             
+Incrementing Framesize to 4
+       LIT    0             
+Incrementing Framesize to 5
+<<< CODE GENERATOR >>> Processing Node block , Label is  
+<<< CODE GENERATOR >>> Processing Node assign , Label is  
+<<< CODE GENERATOR >>> Processing Node <integer> , Label is  
+       LIT    5             
+Incrementing Framesize to 6
+Decrementing Framesize to 5
+       SGV    0             
+<<< CODE GENERATOR >>> Processing Node assign , Label is  
+<<< CODE GENERATOR >>> Processing Node <integer> , Label is  
+       LIT    4             
+Incrementing Framesize to 6
+Decrementing Framesize to 5
+       SGV    1             
+<<< CODE GENERATOR >>> Processing Node assign , Label is  
+<<< CODE GENERATOR >>> Processing Node <integer> , Label is  
+       LIT    3             
+Incrementing Framesize to 6
+Decrementing Framesize to 5
+       SGV    2             
+<<< CODE GENERATOR >>> Processing Node assign , Label is  
+<<< CODE GENERATOR >>> Processing Node <integer> , Label is  
+       LIT    2             
+Incrementing Framesize to 6
+Decrementing Framesize to 5
+       SGV    3             
+<<< CODE GENERATOR >>> Processing Node assign , Label is  
+<<< CODE GENERATOR >>> Processing Node <integer> , Label is  
+       LIT    1             
+Incrementing Framesize to 6
+Decrementing Framesize to 5
+       SGV    4             
+<<< CODE GENERATOR >>> Processing Node output , Label is  
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    0             
+       SOS    OUTPUT        
+Decrementing Framesize to 5
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    1             
+       SOS    OUTPUT        
+Decrementing Framesize to 5
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    2             
+       SOS    OUTPUT        
+Decrementing Framesize to 5
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    3             
+       SOS    OUTPUT        
+Decrementing Framesize to 5
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    4             
+       SOS    OUTPUT        
+Decrementing Framesize to 5
+       SOS    OUTPUTL       
+<<< CODE GENERATOR >>> Processing Node assign , Label is  
+<<< CODE GENERATOR >>> Processing Node - , Label is  
+<<< CODE GENERATOR >>> Processing Node + , Label is  
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    0             
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 7
+       LGV    1             
+       BOP    BPLUS         
+Decrementing Framesize to 6
+<<< CODE GENERATOR >>> Processing Node / , Label is  
+<<< CODE GENERATOR >>> Processing Node * , Label is  
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 7
+       LGV    2             
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 8
+       LGV    3             
+       BOP    BMULT         
+Decrementing Framesize to 7
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 8
+       LGV    4             
+       BOP    BDIV          
+Decrementing Framesize to 7
+       BOP    BMINUS        
+Decrementing Framesize to 6
+Decrementing Framesize to 5
+       SGV    0             
+<<< CODE GENERATOR >>> Processing Node output , Label is  
+<<< CODE GENERATOR >>> Processing Node <identifier> , Label is  
+Incrementing Framesize to 6
+       LGV    0             
+       SOS    OUTPUT        
+Decrementing Framesize to 5
+       SOS    OUTPUTL       
+<<< CODE GENERATOR >>> Processing Node <null> , Label is  
+       HALT                 

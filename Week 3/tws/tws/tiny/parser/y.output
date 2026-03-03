@@ -1,0 +1,1421 @@
+State 78 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: Tiny $end
+
+    1 Tiny: PROGRAM Name ':' Dclns Body Name '.'
+
+    2 Dclns: VAR Dclns_1
+    3      | ε
+
+    4 Dclns_1: ε
+    5        | Dcln ';' Dclns_1
+
+    6 Dcln: Dcln_1
+
+    7 Dcln_1: Name ':' Type
+    8       | Name ',' Dcln_1
+
+    9 Type: INTEGER
+   10     | BOOLEAN
+
+   11 Body: BEGINX Body_1
+
+   12 Body_1: Statement END
+   13       | Statement ';' Body_1
+
+   14 Statement: Name ASSIGNMENT Expression
+   15          | OUTPUT '(' Statement_1
+   16          | IF Expression THEN Statement ELSE Statement
+   17          | IF Expression THEN Statement
+   18          | WHILE Expression DO Statement
+   19          | Body
+   20          | ε
+
+   21 Statement_1: Expression ')'
+   22            | Expression ',' Statement_1
+
+   23 Expression: Expression1
+   24           | Expression1 LTE Expression1
+   25           | Expression1 EQ Expression1
+   26           | Expression1 NEQ Expression1
+   27           | Expression1 GTE Expression1
+   28           | Expression1 LT Expression1
+   29           | Expression1 GT Expression1
+
+   30 Expression1: Expression2
+   31            | Expression1 '+' Expression2
+   32            | Expression1 '-' Expression2
+   33            | Expression1 OR Expression2
+
+   34 Expression2: Expression3
+   35            | Expression2 '*' Expression3
+   36            | Expression2 '/' Expression3
+   37            | Expression2 AND Expression3
+   38            | Expression2 MOD Expression3
+
+   39 Expression3: Expression4
+   40            | '+' Expression3
+   41            | '-' Expression3
+   42            | NOT Expression3
+
+   43 Expression4: Primary
+   44            | Primary EXP Expression4
+
+   45 Primary: READ
+   46        | EOFTOK
+   47        | Name
+   48        | INTEGER_NUM
+   49        | TRUETOK
+   50        | FALSETOK
+   51        | '(' Expression ')'
+
+   52 Name: IDENTIFIER
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '(' (40) 15 51
+    ')' (41) 21 51
+    '*' (42) 35
+    '+' (43) 31 40
+    ',' (44) 8 22
+    '-' (45) 32 41
+    '.' (46) 1
+    '/' (47) 36
+    ':' (58) 1 7
+    ';' (59) 5 13
+    error (256)
+    NEQ <info> (258) 26
+    END <info> (259) 12
+    VAR <info> (260) 2
+    IDENTIFIER <info> (261) 52
+    IF <info> (262) 16 17
+    READ <info> (263) 45
+    ELSE <info> (264) 16
+    THEN <info> (265) 16 17
+    TRUETOK <info> (266) 49
+    MOD <info> (267) 38
+    GT <info> (268) 29
+    EQ <info> (269) 25
+    WHILE <info> (270) 18
+    OUTPUT <info> (271) 15
+    GTE <info> (272) 27
+    NOT <info> (273) 42
+    DO <info> (274) 18
+    BEGINX <info> (275) 11
+    BOOLEAN <info> (276) 10
+    INTEGER_NUM <info> (277) 48
+    AND <info> (278) 37
+    INTEGER <info> (279) 9
+    EXP <info> (280) 44
+    LTE <info> (281) 24
+    FALSETOK <info> (282) 50
+    OR <info> (283) 33
+    LT <info> (284) 28
+    EOFTOK <info> (285) 46
+    ASSIGNMENT <info> (286) 14
+    PROGRAM <info> (287) 1
+
+
+Nonterminals, with rules where they appear
+
+    $accept (43)
+        on left: 0
+    Tiny <dlist> (44)
+        on left: 1
+        on right: 0
+    Dclns <dlist> (45)
+        on left: 2 3
+        on right: 1
+    Dclns_1 <dlist> (46)
+        on left: 4 5
+        on right: 2 5
+    Dcln <dlist> (47)
+        on left: 6
+        on right: 5
+    Dcln_1 <dlist> (48)
+        on left: 7 8
+        on right: 6 8
+    Type <dlist> (49)
+        on left: 9 10
+        on right: 7
+    Body <dlist> (50)
+        on left: 11
+        on right: 1 19
+    Body_1 <dlist> (51)
+        on left: 12 13
+        on right: 11 13
+    Statement <dlist> (52)
+        on left: 14 15 16 17 18 19 20
+        on right: 12 13 16 17 18
+    Statement_1 <dlist> (53)
+        on left: 21 22
+        on right: 15 22
+    Expression <dlist> (54)
+        on left: 23 24 25 26 27 28 29
+        on right: 14 16 17 18 21 22 51
+    Expression1 <dlist> (55)
+        on left: 30 31 32 33
+        on right: 23 24 25 26 27 28 29 31 32 33
+    Expression2 <dlist> (56)
+        on left: 34 35 36 37 38
+        on right: 30 31 32 33 35 36 37 38
+    Expression3 <dlist> (57)
+        on left: 39 40 41 42
+        on right: 34 35 36 37 38 40 41 42
+    Expression4 <dlist> (58)
+        on left: 43 44
+        on right: 39 44
+    Primary <dlist> (59)
+        on left: 45 46 47 48 49 50 51
+        on right: 43 44
+    Name <dlist> (60)
+        on left: 52
+        on right: 1 7 8 14 47
+
+
+State 0
+
+    0 $accept: • Tiny $end
+
+    PROGRAM  shift, and go to state 1
+
+    Tiny  go to state 2
+
+
+State 1
+
+    1 Tiny: PROGRAM • Name ':' Dclns Body Name '.'
+
+    IDENTIFIER  shift, and go to state 3
+
+    Name  go to state 4
+
+
+State 2
+
+    0 $accept: Tiny • $end
+
+    $end  shift, and go to state 5
+
+
+State 3
+
+   52 Name: IDENTIFIER •
+
+    $default  reduce using rule 52 (Name)
+
+
+State 4
+
+    1 Tiny: PROGRAM Name • ':' Dclns Body Name '.'
+
+    ':'  shift, and go to state 6
+
+
+State 5
+
+    0 $accept: Tiny $end •
+
+    $default  accept
+
+
+State 6
+
+    1 Tiny: PROGRAM Name ':' • Dclns Body Name '.'
+
+    VAR  shift, and go to state 7
+
+    $default  reduce using rule 3 (Dclns)
+
+    Dclns  go to state 8
+
+
+State 7
+
+    2 Dclns: VAR • Dclns_1
+
+    IDENTIFIER  shift, and go to state 3
+
+    $default  reduce using rule 4 (Dclns_1)
+
+    Dclns_1  go to state 9
+    Dcln     go to state 10
+    Dcln_1   go to state 11
+    Name     go to state 12
+
+
+State 8
+
+    1 Tiny: PROGRAM Name ':' Dclns • Body Name '.'
+
+    BEGINX  shift, and go to state 13
+
+    Body  go to state 14
+
+
+State 9
+
+    2 Dclns: VAR Dclns_1 •
+
+    $default  reduce using rule 2 (Dclns)
+
+
+State 10
+
+    5 Dclns_1: Dcln • ';' Dclns_1
+
+    ';'  shift, and go to state 15
+
+
+State 11
+
+    6 Dcln: Dcln_1 •
+
+    $default  reduce using rule 6 (Dcln)
+
+
+State 12
+
+    7 Dcln_1: Name • ':' Type
+    8       | Name • ',' Dcln_1
+
+    ':'  shift, and go to state 16
+    ','  shift, and go to state 17
+
+
+State 13
+
+   11 Body: BEGINX • Body_1
+
+    IDENTIFIER  shift, and go to state 3
+    IF          shift, and go to state 18
+    WHILE       shift, and go to state 19
+    OUTPUT      shift, and go to state 20
+    BEGINX      shift, and go to state 13
+
+    $default  reduce using rule 20 (Statement)
+
+    Body       go to state 21
+    Body_1     go to state 22
+    Statement  go to state 23
+    Name       go to state 24
+
+
+State 14
+
+    1 Tiny: PROGRAM Name ':' Dclns Body • Name '.'
+
+    IDENTIFIER  shift, and go to state 3
+
+    Name  go to state 25
+
+
+State 15
+
+    5 Dclns_1: Dcln ';' • Dclns_1
+
+    IDENTIFIER  shift, and go to state 3
+
+    $default  reduce using rule 4 (Dclns_1)
+
+    Dclns_1  go to state 26
+    Dcln     go to state 10
+    Dcln_1   go to state 11
+    Name     go to state 12
+
+
+State 16
+
+    7 Dcln_1: Name ':' • Type
+
+    BOOLEAN  shift, and go to state 27
+    INTEGER  shift, and go to state 28
+
+    Type  go to state 29
+
+
+State 17
+
+    8 Dcln_1: Name ',' • Dcln_1
+
+    IDENTIFIER  shift, and go to state 3
+
+    Dcln_1  go to state 30
+    Name    go to state 12
+
+
+State 18
+
+   16 Statement: IF • Expression THEN Statement ELSE Statement
+   17          | IF • Expression THEN Statement
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression   go to state 40
+    Expression1  go to state 41
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 19
+
+   18 Statement: WHILE • Expression DO Statement
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression   go to state 47
+    Expression1  go to state 41
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 20
+
+   15 Statement: OUTPUT • '(' Statement_1
+
+    '('  shift, and go to state 48
+
+
+State 21
+
+   19 Statement: Body •
+
+    $default  reduce using rule 19 (Statement)
+
+
+State 22
+
+   11 Body: BEGINX Body_1 •
+
+    $default  reduce using rule 11 (Body)
+
+
+State 23
+
+   12 Body_1: Statement • END
+   13       | Statement • ';' Body_1
+
+    END  shift, and go to state 49
+    ';'  shift, and go to state 50
+
+
+State 24
+
+   14 Statement: Name • ASSIGNMENT Expression
+
+    ASSIGNMENT  shift, and go to state 51
+
+
+State 25
+
+    1 Tiny: PROGRAM Name ':' Dclns Body Name • '.'
+
+    '.'  shift, and go to state 52
+
+
+State 26
+
+    5 Dclns_1: Dcln ';' Dclns_1 •
+
+    $default  reduce using rule 5 (Dclns_1)
+
+
+State 27
+
+   10 Type: BOOLEAN •
+
+    $default  reduce using rule 10 (Type)
+
+
+State 28
+
+    9 Type: INTEGER •
+
+    $default  reduce using rule 9 (Type)
+
+
+State 29
+
+    7 Dcln_1: Name ':' Type •
+
+    $default  reduce using rule 7 (Dcln_1)
+
+
+State 30
+
+    8 Dcln_1: Name ',' Dcln_1 •
+
+    $default  reduce using rule 8 (Dcln_1)
+
+
+State 31
+
+   45 Primary: READ •
+
+    $default  reduce using rule 45 (Primary)
+
+
+State 32
+
+   49 Primary: TRUETOK •
+
+    $default  reduce using rule 49 (Primary)
+
+
+State 33
+
+   42 Expression3: NOT • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 53
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 34
+
+   48 Primary: INTEGER_NUM •
+
+    $default  reduce using rule 48 (Primary)
+
+
+State 35
+
+   50 Primary: FALSETOK •
+
+    $default  reduce using rule 50 (Primary)
+
+
+State 36
+
+   46 Primary: EOFTOK •
+
+    $default  reduce using rule 46 (Primary)
+
+
+State 37
+
+   51 Primary: '(' • Expression ')'
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression   go to state 54
+    Expression1  go to state 41
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 38
+
+   40 Expression3: '+' • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 55
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 39
+
+   41 Expression3: '-' • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 56
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 40
+
+   16 Statement: IF Expression • THEN Statement ELSE Statement
+   17          | IF Expression • THEN Statement
+
+    THEN  shift, and go to state 57
+
+
+State 41
+
+   23 Expression: Expression1 •
+   24           | Expression1 • LTE Expression1
+   25           | Expression1 • EQ Expression1
+   26           | Expression1 • NEQ Expression1
+   27           | Expression1 • GTE Expression1
+   28           | Expression1 • LT Expression1
+   29           | Expression1 • GT Expression1
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    NEQ  shift, and go to state 58
+    GT   shift, and go to state 59
+    EQ   shift, and go to state 60
+    GTE  shift, and go to state 61
+    LTE  shift, and go to state 62
+    OR   shift, and go to state 63
+    LT   shift, and go to state 64
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 23 (Expression)
+
+
+State 42
+
+   30 Expression1: Expression2 •
+   35 Expression2: Expression2 • '*' Expression3
+   36            | Expression2 • '/' Expression3
+   37            | Expression2 • AND Expression3
+   38            | Expression2 • MOD Expression3
+
+    MOD  shift, and go to state 67
+    AND  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 30 (Expression1)
+
+
+State 43
+
+   34 Expression2: Expression3 •
+
+    $default  reduce using rule 34 (Expression2)
+
+
+State 44
+
+   39 Expression3: Expression4 •
+
+    $default  reduce using rule 39 (Expression3)
+
+
+State 45
+
+   43 Expression4: Primary •
+   44            | Primary • EXP Expression4
+
+    EXP  shift, and go to state 71
+
+    $default  reduce using rule 43 (Expression4)
+
+
+State 46
+
+   47 Primary: Name •
+
+    $default  reduce using rule 47 (Primary)
+
+
+State 47
+
+   18 Statement: WHILE Expression • DO Statement
+
+    DO  shift, and go to state 72
+
+
+State 48
+
+   15 Statement: OUTPUT '(' • Statement_1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Statement_1  go to state 73
+    Expression   go to state 74
+    Expression1  go to state 41
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 49
+
+   12 Body_1: Statement END •
+
+    $default  reduce using rule 12 (Body_1)
+
+
+State 50
+
+   13 Body_1: Statement ';' • Body_1
+
+    IDENTIFIER  shift, and go to state 3
+    IF          shift, and go to state 18
+    WHILE       shift, and go to state 19
+    OUTPUT      shift, and go to state 20
+    BEGINX      shift, and go to state 13
+
+    $default  reduce using rule 20 (Statement)
+
+    Body       go to state 21
+    Body_1     go to state 75
+    Statement  go to state 23
+    Name       go to state 24
+
+
+State 51
+
+   14 Statement: Name ASSIGNMENT • Expression
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression   go to state 76
+    Expression1  go to state 41
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 52
+
+    1 Tiny: PROGRAM Name ':' Dclns Body Name '.' •
+
+    $default  reduce using rule 1 (Tiny)
+
+
+State 53
+
+   42 Expression3: NOT Expression3 •
+
+    $default  reduce using rule 42 (Expression3)
+
+
+State 54
+
+   51 Primary: '(' Expression • ')'
+
+    ')'  shift, and go to state 77
+
+
+State 55
+
+   40 Expression3: '+' Expression3 •
+
+    $default  reduce using rule 40 (Expression3)
+
+
+State 56
+
+   41 Expression3: '-' Expression3 •
+
+    $default  reduce using rule 41 (Expression3)
+
+
+State 57
+
+   16 Statement: IF Expression THEN • Statement ELSE Statement
+   17          | IF Expression THEN • Statement
+
+    IDENTIFIER  shift, and go to state 3
+    IF          shift, and go to state 18
+    WHILE       shift, and go to state 19
+    OUTPUT      shift, and go to state 20
+    BEGINX      shift, and go to state 13
+
+    $default  reduce using rule 20 (Statement)
+
+    Body       go to state 21
+    Statement  go to state 78
+    Name       go to state 24
+
+
+State 58
+
+   26 Expression: Expression1 NEQ • Expression1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression1  go to state 79
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 59
+
+   29 Expression: Expression1 GT • Expression1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression1  go to state 80
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 60
+
+   25 Expression: Expression1 EQ • Expression1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression1  go to state 81
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 61
+
+   27 Expression: Expression1 GTE • Expression1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression1  go to state 82
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 62
+
+   24 Expression: Expression1 LTE • Expression1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression1  go to state 83
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 63
+
+   33 Expression1: Expression1 OR • Expression2
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression2  go to state 84
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 64
+
+   28 Expression: Expression1 LT • Expression1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression1  go to state 85
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 65
+
+   31 Expression1: Expression1 '+' • Expression2
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression2  go to state 86
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 66
+
+   32 Expression1: Expression1 '-' • Expression2
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression2  go to state 87
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 67
+
+   38 Expression2: Expression2 MOD • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 88
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 68
+
+   37 Expression2: Expression2 AND • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 89
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 69
+
+   35 Expression2: Expression2 '*' • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 90
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 70
+
+   36 Expression2: Expression2 '/' • Expression3
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Expression3  go to state 91
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 71
+
+   44 Expression4: Primary EXP • Expression4
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+
+    Expression4  go to state 92
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 72
+
+   18 Statement: WHILE Expression DO • Statement
+
+    IDENTIFIER  shift, and go to state 3
+    IF          shift, and go to state 18
+    WHILE       shift, and go to state 19
+    OUTPUT      shift, and go to state 20
+    BEGINX      shift, and go to state 13
+
+    $default  reduce using rule 20 (Statement)
+
+    Body       go to state 21
+    Statement  go to state 93
+    Name       go to state 24
+
+
+State 73
+
+   15 Statement: OUTPUT '(' Statement_1 •
+
+    $default  reduce using rule 15 (Statement)
+
+
+State 74
+
+   21 Statement_1: Expression • ')'
+   22            | Expression • ',' Statement_1
+
+    ','  shift, and go to state 94
+    ')'  shift, and go to state 95
+
+
+State 75
+
+   13 Body_1: Statement ';' Body_1 •
+
+    $default  reduce using rule 13 (Body_1)
+
+
+State 76
+
+   14 Statement: Name ASSIGNMENT Expression •
+
+    $default  reduce using rule 14 (Statement)
+
+
+State 77
+
+   51 Primary: '(' Expression ')' •
+
+    $default  reduce using rule 51 (Primary)
+
+
+State 78
+
+   16 Statement: IF Expression THEN Statement • ELSE Statement
+   17          | IF Expression THEN Statement •
+
+    ELSE  shift, and go to state 96
+
+    ELSE      [reduce using rule 17 (Statement)]
+    $default  reduce using rule 17 (Statement)
+
+
+State 79
+
+   26 Expression: Expression1 NEQ Expression1 •
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    OR   shift, and go to state 63
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 26 (Expression)
+
+
+State 80
+
+   29 Expression: Expression1 GT Expression1 •
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    OR   shift, and go to state 63
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 29 (Expression)
+
+
+State 81
+
+   25 Expression: Expression1 EQ Expression1 •
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    OR   shift, and go to state 63
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 25 (Expression)
+
+
+State 82
+
+   27 Expression: Expression1 GTE Expression1 •
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    OR   shift, and go to state 63
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 27 (Expression)
+
+
+State 83
+
+   24 Expression: Expression1 LTE Expression1 •
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    OR   shift, and go to state 63
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 24 (Expression)
+
+
+State 84
+
+   33 Expression1: Expression1 OR Expression2 •
+   35 Expression2: Expression2 • '*' Expression3
+   36            | Expression2 • '/' Expression3
+   37            | Expression2 • AND Expression3
+   38            | Expression2 • MOD Expression3
+
+    MOD  shift, and go to state 67
+    AND  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 33 (Expression1)
+
+
+State 85
+
+   28 Expression: Expression1 LT Expression1 •
+   31 Expression1: Expression1 • '+' Expression2
+   32            | Expression1 • '-' Expression2
+   33            | Expression1 • OR Expression2
+
+    OR   shift, and go to state 63
+    '+'  shift, and go to state 65
+    '-'  shift, and go to state 66
+
+    $default  reduce using rule 28 (Expression)
+
+
+State 86
+
+   31 Expression1: Expression1 '+' Expression2 •
+   35 Expression2: Expression2 • '*' Expression3
+   36            | Expression2 • '/' Expression3
+   37            | Expression2 • AND Expression3
+   38            | Expression2 • MOD Expression3
+
+    MOD  shift, and go to state 67
+    AND  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 31 (Expression1)
+
+
+State 87
+
+   32 Expression1: Expression1 '-' Expression2 •
+   35 Expression2: Expression2 • '*' Expression3
+   36            | Expression2 • '/' Expression3
+   37            | Expression2 • AND Expression3
+   38            | Expression2 • MOD Expression3
+
+    MOD  shift, and go to state 67
+    AND  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 32 (Expression1)
+
+
+State 88
+
+   38 Expression2: Expression2 MOD Expression3 •
+
+    $default  reduce using rule 38 (Expression2)
+
+
+State 89
+
+   37 Expression2: Expression2 AND Expression3 •
+
+    $default  reduce using rule 37 (Expression2)
+
+
+State 90
+
+   35 Expression2: Expression2 '*' Expression3 •
+
+    $default  reduce using rule 35 (Expression2)
+
+
+State 91
+
+   36 Expression2: Expression2 '/' Expression3 •
+
+    $default  reduce using rule 36 (Expression2)
+
+
+State 92
+
+   44 Expression4: Primary EXP Expression4 •
+
+    $default  reduce using rule 44 (Expression4)
+
+
+State 93
+
+   18 Statement: WHILE Expression DO Statement •
+
+    $default  reduce using rule 18 (Statement)
+
+
+State 94
+
+   22 Statement_1: Expression ',' • Statement_1
+
+    IDENTIFIER   shift, and go to state 3
+    READ         shift, and go to state 31
+    TRUETOK      shift, and go to state 32
+    NOT          shift, and go to state 33
+    INTEGER_NUM  shift, and go to state 34
+    FALSETOK     shift, and go to state 35
+    EOFTOK       shift, and go to state 36
+    '('          shift, and go to state 37
+    '+'          shift, and go to state 38
+    '-'          shift, and go to state 39
+
+    Statement_1  go to state 97
+    Expression   go to state 74
+    Expression1  go to state 41
+    Expression2  go to state 42
+    Expression3  go to state 43
+    Expression4  go to state 44
+    Primary      go to state 45
+    Name         go to state 46
+
+
+State 95
+
+   21 Statement_1: Expression ')' •
+
+    $default  reduce using rule 21 (Statement_1)
+
+
+State 96
+
+   16 Statement: IF Expression THEN Statement ELSE • Statement
+
+    IDENTIFIER  shift, and go to state 3
+    IF          shift, and go to state 18
+    WHILE       shift, and go to state 19
+    OUTPUT      shift, and go to state 20
+    BEGINX      shift, and go to state 13
+
+    $default  reduce using rule 20 (Statement)
+
+    Body       go to state 21
+    Statement  go to state 98
+    Name       go to state 24
+
+
+State 97
+
+   22 Statement_1: Expression ',' Statement_1 •
+
+    $default  reduce using rule 22 (Statement_1)
+
+
+State 98
+
+   16 Statement: IF Expression THEN Statement ELSE Statement •
+
+    $default  reduce using rule 16 (Statement)
