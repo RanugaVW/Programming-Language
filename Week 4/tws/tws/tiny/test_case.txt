@@ -1,0 +1,8 @@
+program pr2c05:
+var a: integer;
+begin
+   case a of
+      10: output(10);
+      70: repeat a := a + 1 until a<75
+   end;
+end pr2c05.
