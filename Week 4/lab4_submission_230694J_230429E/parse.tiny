@@ -1,0 +1,66 @@
+%%
+Tiny       -> PROGRAM Name ':' Dclns Body Name '.' 	=> "program";
+Dclns      -> VAR (Dcln ';')*				=> "dclns"
+           -> 					     	=> "dclns";
+Dcln       -> Name list ',' ':' Type			=> "dcln";
+Type       -> INTEGER 		             		=> "integer"
+           -> BOOLEAN				     	=> "boolean";
+Body       -> BEGINX Statement list ';' END      	=> "block";
+Statement  -> Name ASSIGNMENT Expression          	=> "assign"
+           -> OUTPUT '(' Expression list ',' ')'        => "output"
+           -> IF Expression THEN Statement
+                            ELSE Statement       	=> "if"
+           -> IF Expression THEN Statement              => "if"
+           -> WHILE Expression DO Statement      	=> "while"
+           -> FOR Name ASSIGNMENT Expression TO Expression DO Statement => "for"
+           -> FOR Name ASSIGNMENT Expression DOWNTO Expression DO Statement => "fordown"
+           -> REPEAT Statement list ';' UNTIL Expression => "repeat"
+           -> LOOP Statement list ';' POOL              => "loop"
+           -> EXITTOK                                   => "exit"
+           -> CASE Expression OF (Caseclause ';')* OtherwiseClause END => "case"
+           -> Name SWAP Name                            => "swap"
+           -> Body
+	   ->                                        	=> "<null>";
+
+Caseclause -> Caselabel list ',' ':' Statement          => "case_clause";
+Caselabel  -> INTEGER_NUM                               => "<integer>"
+           -> INTEGER_NUM DOTDOT INTEGER_NUM            => "..";
+OtherwiseClause -> OTHERWISE Statement                  => "otherwise"
+           ->                                           => "<null>";
+
+Expression -> Expression1
+           -> Expression1 LTE Expression1		=> "<="
+           -> Expression1 EQ Expression1		=> "="
+           -> Expression1 NEQ Expression1		=> "<>"
+           -> Expression1 GTE Expression1		=> ">="
+           -> Expression1 LT Expression1		=> "<"
+           -> Expression1 GT Expression1		=> ">";
+
+Expression1 -> Expression2
+            -> Expression1 '+' Expression2		=> "+"
+            -> Expression1 '-' Expression2		=> "-"
+            -> Expression1 OR Expression2		=> "or";
+
+Expression2 -> Expression3
+            -> Expression2 '*' Expression3		=> "*"
+            -> Expression2 '/' Expression3		=> "/"
+            -> Expression2 AND Expression3		=> "and"
+            -> Expression2 MOD Expression3		=> "mod";
+
+Expression3 -> Expression4
+            -> '+' Expression3				=> "+"
+            -> '-' Expression3				=> "-"
+            -> NOT Expression3				=> "not";
+
+Expression4 -> Primary
+            -> Primary EXP Expression4			=> "**";
+
+Primary    -> READ                                 	=> "read"
+           -> EOFTOK                                    => "eof"
+           -> Name
+           -> INTEGER_NUM				=> "<integer>"
+           -> TRUETOK                                   => "true"
+           -> FALSETOK                                  => "false"
+           -> '(' Expression ')';
+
+Name       -> IDENTIFIER				=> "<identifier>";
